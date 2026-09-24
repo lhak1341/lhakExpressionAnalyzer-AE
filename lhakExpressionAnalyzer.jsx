@@ -5,7 +5,7 @@
   var CONFIG = {
     META: {
       SCRIPT_NAME: 'Expression Usage Analyzer',
-      VERSION: 'v0.0.1',
+      VERSION: 'v0.0.2',
       DESCRIPTION:
         'Analyzes and displays all expressions used in the active project with hierarchical navigation',
     },
@@ -481,7 +481,12 @@
       clearLayersList();
       clearPropertiesList();
 
-      var compCount = Object.keys(expressionData).length;
+      var compCount = 0;
+      for (var key in expressionData) {
+        if (expressionData.hasOwnProperty(key)) {
+          compCount++;
+        }
+      }
       if (compCount === 0) {
         ui.compositionsListBox.removeAll();
         ui.compositionsListBox.add('item', CONFIG.UI.LABEL.NO_EXPRESSIONS);
